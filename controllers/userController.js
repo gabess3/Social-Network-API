@@ -35,7 +35,7 @@ module.exports = {
     )
       .then((user) =>
         !user
-          ? res.status(404).json({ message: "No user with this id!" })
+          ? res.status(404).json({ message: "No user found with this ID." })
           : res.json(user)
       )
       .catch((err) => {
@@ -49,11 +49,41 @@ module.exports = {
     User.findOneAndDelete({ _id: req.params.ObjectId })
       .then((user) =>
         !user
-          ? res.status(404).json({ message: "No user with that ID" })
+          ? res.status(404).json({ message: "No user found with this ID." })
           : Thought.deleteMany({ _id: { $in: user.thoughts } })
       )
       .then(() =>
         res.json({ message: "User and associated thoughts have been deleted." })
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
+  // Add friend to user's friend list
+  addFriend(req, res) {
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $addToSet: { friends: req.body } },
+      { runValidators: true, new: true }
+    )
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No user found with this ID." })
+          : res.json(user)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
+  // Delete a friend from user's friend list
+  deleteFriend(req, res) {
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $pull: { friends: { friendId: req.params.friendId } } },
+      { runValidators: true, new: true }
+    )
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No user found with this ID." })
+          : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },

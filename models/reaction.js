@@ -22,10 +22,14 @@ const reactionSchema = new Schema(
   },
   {
     toJSON: {
+      virtuals: true,
       getters: true,
     },
-    id: false,
   }
 );
+
+reactionSchema.virtual("formatCreateAt").get(function () {
+  return new Date(this.createdAt).toLocaleDateString();
+});
 
 module.exports = reactionSchema;
