@@ -10,7 +10,7 @@ module.exports = {
 
   // Get Single Thought by ID
   getSingleThought(req, res) {
-    Thought.findOne({ _id: req.params.ObjectId })
+    Thought.findOne({ _id: req.params.thoughtId })
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user found with that ID" })

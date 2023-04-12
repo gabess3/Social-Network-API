@@ -10,7 +10,7 @@ module.exports = {
 
   // Get Single User with Thought and Friend data
   getSingleUser(req, res) {
-    User.findOne({ _id: req.params.ObjectId })
+    User.findOne({ _id: req.params.userId })
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user found with that ID" })
@@ -46,7 +46,7 @@ module.exports = {
 
   // Delete a user and its associated thoughts
   deleteUser(req, res) {
-    User.findOneAndDelete({ _id: req.params.ObjectId })
+    User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user found with this ID." })
@@ -62,7 +62,7 @@ module.exports = {
   addFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $addToSet: { friends: req.body } },
+      { $addToSet: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((user) =>

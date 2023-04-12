@@ -19,9 +19,9 @@ router
   .put(updateThought)
   .delete(deleteThought);
 
-  // /api/thoughts/:thoughtId/reaction
+  // /api/thoughts/:thoughtId/reactions
 router
-  .route('/:thoughtId/reaction')
+  .route('/:thoughtId/reactions')
   .post(addReaction)
   .delete(deleteReaction);
 
