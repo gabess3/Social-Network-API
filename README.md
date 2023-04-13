@@ -42,7 +42,7 @@
 
   ## Link to Video Walkthrough of Program
 
-  [placeholderlink.com](placeholderlink.com)
+  [https://drive.google.com/file/d/1zSYlH9T1tNphXY4Dt-VSRr1hxVU8FNeW/view](https://drive.google.com/file/d/1zSYlH9T1tNphXY4Dt-VSRr1hxVU8FNeW/view)
 
   ## Questions  
 
